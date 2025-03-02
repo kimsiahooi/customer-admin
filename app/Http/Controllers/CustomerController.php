@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CustomerController extends Controller
 {
@@ -28,15 +29,22 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        Customer::create($request->validate([
-            // 'image' => ['nullable'],
+        $validatedData = $request->validate([
+            'image' => ['nullable', 'image', 'max:2000', 'mimes:png,jpg,jpeg,webp'],
             'first_name' => ['required', 'max:255', 'string'],
             'last_name' => ['required', 'max:255', 'string'],
             'email' => ['required', 'email', 'max:255'],
             'phone' => ['required', 'string', 'max:50'],
             'bank_account_number' => ['required', 'numeric'],
             'about' => ['nullable', 'string', 'max:500'],
-        ]));
+        ]);
+
+        if ($request->hasFile('image')) {
+            $fileName = $request->file('image')->store('uploads', 'public');
+            $validatedData['image'] = $fileName;
+        }
+
+        Customer::create($validatedData);
 
         return redirect()->route('customers.index');
     }

@@ -30,6 +30,7 @@
                     type="file"
                     class="form-control"
                     name="image"
+                    accept="image/*"
                     @change="fileHandler" />
                 </div>
               </div>
@@ -67,7 +68,7 @@
                 <div class="form-group">
                   <label for="">Phone</label>
                   <input
-                    type="text"
+                    type="tel"
                     class="form-control"
                     name="phone"
                     v-model="form.phone" />
@@ -78,7 +79,7 @@
                 <div class="form-group">
                   <label for="">Bank Account Number</label>
                   <input
-                    type="text"
+                    type="number"
                     class="form-control"
                     name="bank_account_number"
                     v-model="form.bank_account_number" />
