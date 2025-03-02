@@ -29,42 +29,43 @@ __VLS_asFunctionalElement(__VLS_intrinsicElements.a, __VLS_intrinsicElements.a)(
 __VLS_asFunctionalElement(__VLS_intrinsicElements.i, __VLS_intrinsicElements.i)(__assign({ class: "fas fa-chevron-left" }));
 __VLS_asFunctionalElement(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)(__assign({ class: "card-body" }));
 __VLS_asFunctionalElement(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)(__assign({ class: "row" }));
+__VLS_asFunctionalElement(__VLS_intrinsicElements.form, __VLS_intrinsicElements.form)({});
 __VLS_asFunctionalElement(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)(__assign({ class: "col-md-12 mb-3" }));
 __VLS_asFunctionalElement(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)(__assign({ class: "form-group" }));
 __VLS_asFunctionalElement(__VLS_intrinsicElements.label, __VLS_intrinsicElements.label)({
     for: "",
 });
-__VLS_asFunctionalElement(__VLS_intrinsicElements.input)(__assign({ type: "file" }, { class: "form-control" }));
+__VLS_asFunctionalElement(__VLS_intrinsicElements.input)(__assign(__assign({ type: "file" }, { class: "form-control" }), { name: "image" }));
 __VLS_asFunctionalElement(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)(__assign({ class: "col-md-6 mb-3" }));
 __VLS_asFunctionalElement(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)(__assign({ class: "form-group" }));
 __VLS_asFunctionalElement(__VLS_intrinsicElements.label, __VLS_intrinsicElements.label)({
     for: "",
 });
-__VLS_asFunctionalElement(__VLS_intrinsicElements.input)(__assign({ type: "text" }, { class: "form-control" }));
+__VLS_asFunctionalElement(__VLS_intrinsicElements.input)(__assign(__assign({ type: "text" }, { class: "form-control" }), { name: "first_name" }));
 __VLS_asFunctionalElement(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)(__assign({ class: "col-md-6 mb-3" }));
 __VLS_asFunctionalElement(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)(__assign({ class: "form-group" }));
 __VLS_asFunctionalElement(__VLS_intrinsicElements.label, __VLS_intrinsicElements.label)({
     for: "",
 });
-__VLS_asFunctionalElement(__VLS_intrinsicElements.input)(__assign({ type: "text" }, { class: "form-control" }));
+__VLS_asFunctionalElement(__VLS_intrinsicElements.input)(__assign(__assign({ type: "text" }, { class: "form-control" }), { name: "last_name" }));
 __VLS_asFunctionalElement(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)(__assign({ class: "col-md-6 mb-3" }));
 __VLS_asFunctionalElement(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)(__assign({ class: "form-group" }));
 __VLS_asFunctionalElement(__VLS_intrinsicElements.label, __VLS_intrinsicElements.label)({
     for: "",
 });
-__VLS_asFunctionalElement(__VLS_intrinsicElements.input)(__assign({ type: "email" }, { class: "form-control" }));
+__VLS_asFunctionalElement(__VLS_intrinsicElements.input)(__assign(__assign({ type: "email" }, { class: "form-control" }), { name: "email" }));
 __VLS_asFunctionalElement(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)(__assign({ class: "col-md-6 mb-3" }));
 __VLS_asFunctionalElement(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)(__assign({ class: "form-group" }));
 __VLS_asFunctionalElement(__VLS_intrinsicElements.label, __VLS_intrinsicElements.label)({
     for: "",
 });
-__VLS_asFunctionalElement(__VLS_intrinsicElements.input)(__assign({ type: "text" }, { class: "form-control" }));
+__VLS_asFunctionalElement(__VLS_intrinsicElements.input)(__assign(__assign({ type: "text" }, { class: "form-control" }), { name: "phone" }));
 __VLS_asFunctionalElement(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)(__assign({ class: "col-md-12 mb-3" }));
 __VLS_asFunctionalElement(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)(__assign({ class: "form-group" }));
 __VLS_asFunctionalElement(__VLS_intrinsicElements.label, __VLS_intrinsicElements.label)({
     for: "",
 });
-__VLS_asFunctionalElement(__VLS_intrinsicElements.input)(__assign({ type: "text" }, { class: "form-control" }));
+__VLS_asFunctionalElement(__VLS_intrinsicElements.input)(__assign(__assign({ type: "text" }, { class: "form-control" }), { name: "bank_account_number" }));
 __VLS_asFunctionalElement(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)(__assign({ class: "col-md-12 mb-3" }));
 __VLS_asFunctionalElement(__VLS_intrinsicElements.button, __VLS_intrinsicElements.button)(__assign({ type: "submit" }, { class: "btn btn-dark" }));
 __VLS_asFunctionalElement(__VLS_intrinsicElements.i, __VLS_intrinsicElements.i)(__assign({ class: "fas fa-save" }));
