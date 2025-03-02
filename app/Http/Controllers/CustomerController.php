@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -27,17 +28,17 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'image' => ['nullable'],
+        Customer::create($request->validate([
+            // 'image' => ['nullable'],
             'first_name' => ['required', 'max:255', 'string'],
             'last_name' => ['required', 'max:255', 'string'],
-            'email' => ['required', 'email'],
-            'phone' => ['required', 'string'],
+            'email' => ['required', 'email', 'max:255'],
+            'phone' => ['required', 'string', 'max:50'],
             'bank_account_number' => ['required', 'numeric'],
             'about' => ['nullable', 'string', 'max:500'],
-        ]);
+        ]));
 
-        dd($request->all());
+        return redirect()->route('customers.index');
     }
 
     /**
