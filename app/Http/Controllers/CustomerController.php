@@ -13,7 +13,10 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return inertia('Customer/Index');
+        $customers = Customer::all();
+        return inertia('Customer/Index', [
+            'customers' => $customers
+        ]);
     }
 
     /**

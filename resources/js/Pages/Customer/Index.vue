@@ -45,9 +45,9 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
+                <th scope="col">Avatar</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
-                <th scope="col">Date of Birth</th>
                 <th scope="col">Phone Number</th>
                 <th scope="col">Email</th>
                 <th scope="col">BAN</th>
@@ -55,27 +55,42 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Jhone</td>
-                <td>Deo</td>
-                <td>7-7-2000</td>
-                <td>881-6929-0200</td>
-                <td>jhone@gmail.com</td>
-                <td>1902982829282</td>
+              <tr v-for="customer in customers" :key="customer.id">
+                <th scope="row">{{ customer.id }}</th>
                 <td>
-                  <a href="" style="color: #2c2c2c" class="ms-1 me-1"
-                    ><i class="far fa-edit"></i
-                  ></a>
+                  <img
+                    style="
+                      width: 40px;
+                      height: 40px;
+                      object-fit: cover;
+                      border-radius: 50%;
+                    "
+                    :src="
+                      customer.image ??
+                      `https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(
+                        `${customer.first_name} ${customer.last_name}`
+                      )}`
+                    "
+                    :alt="`${customer.first_name} ${customer.last_name}`" />
+                </td>
+                <td>{{ customer.first_name }}</td>
+                <td>{{ customer.last_name }}</td>
+                <td>{{ customer.phone }}</td>
+                <td>{{ customer.email }}</td>
+                <td>{{ customer.bank_account_number }}</td>
+                <td>
+                  <a href="" style="color: #2c2c2c" class="ms-1 me-1">
+                    <i class="far fa-edit"></i>
+                  </a>
                   <a
                     href="/customer-details.html"
                     style="color: #2c2c2c"
-                    class="ms-1 me-1"
-                    ><i class="far fa-eye"></i
-                  ></a>
-                  <a href="" style="color: #2c2c2c" class="ms-1 me-1"
-                    ><i class="fas fa-trash-alt"></i
-                  ></a>
+                    class="ms-1 me-1">
+                    <i class="far fa-eye"></i>
+                  </a>
+                  <a href="" style="color: #2c2c2c" class="ms-1 me-1">
+                    <i class="fas fa-trash-alt"></i>
+                  </a>
                 </td>
               </tr>
             </tbody>
@@ -88,6 +103,11 @@
 
 <script setup lang="ts">
 import Layout from "@/Layouts/App.vue";
+import type { Customer } from "@/types/Customer";
 
 defineOptions({ layout: Layout });
+
+defineProps<{
+  customers: Customer[];
+}>();
 </script>
