@@ -1,0 +1,15 @@
+{
+  "\u0000plugin-vue:export-helper": [],
+  "resources/css/style.css": [],
+  "resources/js/Layouts/App.vue": [],
+  "resources/js/Pages/Customer/Create.vue": [],
+  "resources/js/Pages/Customer/Create.vue?vue&type=script&setup=true&lang.ts": [],
+  "resources/js/Pages/Customer/Edit.vue": [],
+  "resources/js/Pages/Customer/Edit.vue?vue&type=script&setup=true&lang.ts": [],
+  "resources/js/Pages/Customer/Index.vue": [],
+  "resources/js/Pages/Customer/Index.vue?vue&type=script&setup=true&lang.ts": [],
+  "resources/js/Pages/Customer/Show.vue": [],
+  "resources/js/Pages/Customer/Show.vue?vue&type=script&setup=true&lang.ts": [],
+  "resources/js/ssr.js": [],
+  "vendor/tightenco/ziggy/dist/index.js": []
+}
