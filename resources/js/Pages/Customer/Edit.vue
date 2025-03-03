@@ -24,6 +24,16 @@
           <form @submit.prevent="formHandler">
             <div class="row">
               <div class="col-md-12 mb-3">
+                <img
+                  style="width: 100px; height: 100px; object-fit: cover"
+                  :src="
+                    customer.image
+                      ? `/${customer.image}`
+                      : `https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(
+                          `${form.first_name} ${form.last_name}`
+                        )}`
+                  "
+                  :alt="`${form.first_name} ${form.last_name}`" />
                 <div class="form-group">
                   <label for="">Image</label>
                   <input
@@ -96,7 +106,7 @@
               </div>
               <div class="col-md-12 mb-3">
                 <button type="submit" class="btn btn-dark">
-                  <i class="fas fa-save"></i> Create
+                  <i class="fas fa-save"></i> Update
                 </button>
               </div>
             </div>
@@ -110,8 +120,13 @@
 <script setup lang="ts">
 import Layout from "@/Layouts/App.vue";
 import { useForm, usePage } from "@inertiajs/vue3";
+import type { Customer } from "@/types/Customer";
 
 defineOptions({ layout: Layout });
+
+const { customer } = defineProps<{
+  customer: Customer;
+}>();
 
 const page = usePage();
 
@@ -125,12 +140,12 @@ const form = useForm<{
   about: string;
 }>({
   image: null,
-  first_name: "",
-  last_name: "",
-  email: "",
-  phone: "",
-  bank_account_number: "",
-  about: "",
+  first_name: customer.first_name,
+  last_name: customer.last_name,
+  email: customer.email,
+  phone: customer.phone,
+  bank_account_number: customer.bank_account_number,
+  about: customer.about || "",
 });
 
 const fileHandler = (e: Event) => {
@@ -140,5 +155,8 @@ const fileHandler = (e: Event) => {
   }
 };
 
-const formHandler = () => form.post(route("customers.store"));
+const formHandler = () =>
+  form.post(
+    route("customers.update", { _method: "put", customer: customer.id })
+  );
 </script>
