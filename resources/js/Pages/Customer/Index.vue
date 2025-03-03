@@ -87,7 +87,7 @@
                     <i class="far fa-edit"></i>
                   </a>
                   <a
-                    href="/customer-details.html"
+                    :href="route('customers.show', customer.id)"
                     style="color: #2c2c2c"
                     class="ms-1 me-1">
                     <i class="far fa-eye"></i>
