@@ -92,9 +92,17 @@
                     class="ms-1 me-1">
                     <i class="far fa-eye"></i>
                   </Link>
-                  <a href="" style="color: #2c2c2c" class="ms-1 me-1">
+                  <button
+                    @click="deleteCustomerHandler(customer)"
+                    style="
+                      color: #2c2c2c;
+                      background-color: transparent;
+                      padding: 0;
+                      border: 0;
+                    "
+                    class="ms-1 me-1">
                     <i class="fas fa-trash-alt"></i>
-                  </a>
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -108,11 +116,17 @@
 <script setup lang="ts">
 import Layout from "@/Layouts/App.vue";
 import type { Customer } from "@/types/Customer";
-import { Link } from "@inertiajs/vue3";
+import { Link, router } from "@inertiajs/vue3";
 
 defineOptions({ layout: Layout });
 
 defineProps<{
   customers: Customer[];
 }>();
+
+const deleteCustomerHandler = (customer: Customer) => {
+  if (confirm("Are you sure you want to delete the customer?")) {
+    router.delete(route("customers.destroy", customer.id));
+  }
+};
 </script>
