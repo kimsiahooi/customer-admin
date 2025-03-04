@@ -34,9 +34,12 @@
             </div>
             <div class="col-md-2">
               <div class="input-group mb-3">
-                <select class="form-select" name="" id="">
-                  <option value="">Newest to Old</option>
-                  <option value="">Old to Newest</option>
+                <select
+                  class="form-select"
+                  v-model="params.order"
+                  @change="sortHandler">
+                  <option value="desc">Newest to Oldest</option>
+                  <option value="asc">Oldest to Newest</option>
                 </select>
               </div>
             </div>
@@ -119,7 +122,8 @@
 import Layout from "@/Layouts/App.vue";
 import type { Customer } from "@/types/Customer";
 import { Link, router } from "@inertiajs/vue3";
-import { reactive } from "vue";
+import { reactive, computed } from "vue";
+import { pickBy } from "lodash-es";
 
 defineOptions({ layout: Layout });
 
@@ -129,7 +133,10 @@ defineProps<{
 
 const params = reactive({
   search: "",
+  order: "desc",
 });
+
+const computedParams = computed(() => pickBy(params, (v) => v));
 
 const deleteCustomerHandler = (customer: Customer) => {
   if (confirm("Are you sure you want to delete the customer?")) {
@@ -137,10 +144,18 @@ const deleteCustomerHandler = (customer: Customer) => {
   }
 };
 
-const searchHandler = () => {
-  router.get(route("customers.index"), params.search ? params : undefined, {
+const fetchData = () => {
+  router.get(route("customers.index"), computedParams.value, {
     preserveState: true,
     preserveScroll: true,
   });
+};
+
+const searchHandler = () => {
+  fetchData();
+};
+
+const sortHandler = () => {
+  fetchData();
 };
 </script>
