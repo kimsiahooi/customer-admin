@@ -14,10 +14,12 @@
               </Link>
             </div>
             <div class="col-md-8">
-              <form action="">
+              <form @submit.prevent="searchHandler">
                 <div class="input-group mb-3">
                   <input
                     type="text"
+                    v-model="params.search"
+                    name="search"
                     class="form-control"
                     placeholder="Search anything..."
                     aria-describedby="button-addon2" />
@@ -117,6 +119,7 @@
 import Layout from "@/Layouts/App.vue";
 import type { Customer } from "@/types/Customer";
 import { Link, router } from "@inertiajs/vue3";
+import { reactive } from "vue";
 
 defineOptions({ layout: Layout });
 
@@ -124,9 +127,20 @@ defineProps<{
   customers: Customer[];
 }>();
 
+const params = reactive({
+  search: "",
+});
+
 const deleteCustomerHandler = (customer: Customer) => {
   if (confirm("Are you sure you want to delete the customer?")) {
     router.delete(route("customers.destroy", customer.id));
   }
+};
+
+const searchHandler = () => {
+  router.get(route("customers.index"), params.search ? params : undefined, {
+    preserveState: true,
+    preserveScroll: true,
+  });
 };
 </script>
