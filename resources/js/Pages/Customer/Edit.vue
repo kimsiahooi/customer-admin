@@ -29,9 +29,7 @@
                   :src="
                     customer.image
                       ? `/${customer.image}`
-                      : `https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(
-                          `${form.first_name} ${form.last_name}`
-                        )}`
+                      : generateAvatar(customer)
                   "
                   :alt="`${form.first_name} ${form.last_name}`" />
                 <div class="form-group">
@@ -121,6 +119,7 @@
 import Layout from "@/Layouts/App.vue";
 import { Link, useForm, usePage } from "@inertiajs/vue3";
 import type { Customer } from "@/types/Customer";
+import { useAvatar } from "@/Composables/useAvatar";
 
 defineOptions({ layout: Layout });
 
@@ -129,6 +128,8 @@ const { customer } = defineProps<{
 }>();
 
 const page = usePage();
+
+const { generateAvatar } = useAvatar();
 
 const form = useForm<{
   image: File | null;

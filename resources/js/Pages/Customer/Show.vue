@@ -18,9 +18,7 @@
                 :src="
                   customer.image
                     ? `/${customer.image}`
-                    : `https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(
-                        `${customer.first_name} ${customer.last_name}`
-                      )}`
+                    : generateAvatar(customer)
                 "
                 :alt="`${customer.first_name} ${customer.last_name}`" />
             </div>
@@ -76,10 +74,13 @@
 import Layout from "@/Layouts/App.vue";
 import type { Customer } from "@/types/Customer";
 import { Link } from "@inertiajs/vue3";
+import { useAvatar } from "@/Composables/useAvatar";
 
 defineOptions({ layout: Layout });
 
 defineProps<{
   customer: Customer;
 }>();
+
+const { generateAvatar } = useAvatar();
 </script>

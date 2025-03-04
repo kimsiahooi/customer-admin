@@ -73,9 +73,7 @@
                     :src="
                       customer.image
                         ? `/${customer.image}`
-                        : `https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(
-                            `${customer.first_name} ${customer.last_name}`
-                          )}`
+                        : generateAvatar(customer)
                     "
                     :alt="`${customer.first_name} ${customer.last_name}`" />
                 </td>
@@ -124,12 +122,15 @@ import type { Customer } from "@/types/Customer";
 import { Link, router } from "@inertiajs/vue3";
 import { reactive, computed } from "vue";
 import { pickBy } from "lodash-es";
+import { useAvatar } from "@/Composables/useAvatar";
 
 defineOptions({ layout: Layout });
 
 defineProps<{
   customers: Customer[];
 }>();
+
+const { generateAvatar } = useAvatar();
 
 const params = reactive({
   search: "",
