@@ -1,6 +1,7 @@
 {
   "\u0000plugin-vue:export-helper": [],
   "resources/css/style.css": [],
+  "resources/js/Composables/useAvatar.ts": [],
   "resources/js/Layouts/App.vue": [],
   "resources/js/Pages/Customer/Create.vue": [],
   "resources/js/Pages/Customer/Create.vue?vue&type=script&setup=true&lang.ts": [],

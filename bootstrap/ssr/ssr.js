@@ -1,6 +1,8 @@
 import { useSSRContext, defineComponent, mergeProps, unref, withCtx, createVNode, createTextVNode, reactive, computed, createSSRApp, h as h$1 } from "vue";
 import { ssrRenderSlot, ssrRenderAttrs, ssrRenderList, ssrInterpolate, ssrRenderComponent, ssrRenderAttr, ssrRenderStyle, ssrIncludeBooleanAttr, ssrLooseContain, ssrLooseEqual } from "vue/server-renderer";
 import { usePage, useForm, Link, createInertiaApp } from "@inertiajs/vue3";
+import { personas } from "@dicebear/collection";
+import { createAvatar } from "@dicebear/core";
 import { pickBy } from "lodash-es";
 import createServer from "@inertiajs/vue3/server";
 import { renderToString } from "@vue/server-renderer";
@@ -80,6 +82,15 @@ const __vite_glob_0_0 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.def
   __proto__: null,
   default: _sfc_main$3
 }, Symbol.toStringTag, { value: "Module" }));
+const useAvatar = () => {
+  const generateAvatar = (customer) => {
+    const avatar = createAvatar(personas, {
+      seed: `${customer.first_name} ${customer.last_name}`
+    });
+    return avatar.toDataUri();
+  };
+  return { generateAvatar };
+};
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   ...{ layout: Layout },
   __name: "Edit",
@@ -89,6 +100,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     const page = usePage();
+    const { generateAvatar } = useAvatar();
     const form = useForm({
       image: null,
       first_name: __props.customer.first_name,
@@ -129,9 +141,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       }, _parent));
       _push(`</div></div></div><div class="card-body"><form><div class="row"><div class="col-md-12 mb-3"><img style="${ssrRenderStyle({ "width": "100px", "height": "100px", "object-fit": "cover" })}"${ssrRenderAttr(
         "src",
-        _ctx.customer.image ? `/${_ctx.customer.image}` : `https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(
-          `${unref(form).first_name} ${unref(form).last_name}`
-        )}`
+        _ctx.customer.image ? `/${_ctx.customer.image}` : unref(generateAvatar)(_ctx.customer)
       )}${ssrRenderAttr("alt", `${unref(form).first_name} ${unref(form).last_name}`)}><div class="form-group"><label for="">Image</label><input type="file" class="form-control" name="image" accept="image/*"></div></div><div class="col-md-6 mb-3"><div class="form-group"><label for="">First Name</label><input type="text" class="form-control" name="first_name"${ssrRenderAttr("value", unref(form).first_name)}></div></div><div class="col-md-6 mb-3"><div class="form-group"><label for="">Last Name</label><input type="text" class="form-control" name="last_name"${ssrRenderAttr("value", unref(form).last_name)}></div></div><div class="col-md-6 mb-3"><div class="form-group"><label for="">Email</label><input type="email" class="form-control" name="email"${ssrRenderAttr("value", unref(form).email)}></div></div><div class="col-md-6 mb-3"><div class="form-group"><label for="">Phone</label><input type="tel" class="form-control" name="phone"${ssrRenderAttr("value", unref(form).phone)}></div></div><div class="col-md-12 mb-3"><div class="form-group"><label for="">Bank Account Number</label><input type="number" class="form-control" name="bank_account_number"${ssrRenderAttr("value", unref(form).bank_account_number)}></div></div><div class="col-md-12 mb-3"><div class="form-group"><label for="">About</label><textarea class="form-control" name="about">${ssrInterpolate(unref(form).about)}</textarea></div></div><div class="col-md-12 mb-3"><button type="submit" class="btn btn-dark"><i class="fas fa-save"></i> Update </button></div></div></form></div></div></div></div>`);
     };
   }
@@ -154,6 +164,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     customers: {}
   },
   setup(__props) {
+    const { generateAvatar } = useAvatar();
     const params = reactive({
       search: "",
       order: "desc"
@@ -182,9 +193,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
       ssrRenderList(_ctx.customers, (customer) => {
         _push(`<tr><th scope="row">${ssrInterpolate(customer.id)}</th><td><img style="${ssrRenderStyle({ "width": "40px", "height": "40px", "object-fit": "cover", "border-radius": "50%" })}"${ssrRenderAttr(
           "src",
-          customer.image ? `/${customer.image}` : `https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(
-            `${customer.first_name} ${customer.last_name}`
-          )}`
+          customer.image ? `/${customer.image}` : unref(generateAvatar)(customer)
         )}${ssrRenderAttr("alt", `${customer.first_name} ${customer.last_name}`)}></td><td>${ssrInterpolate(customer.first_name)}</td><td>${ssrInterpolate(customer.last_name)}</td><td>${ssrInterpolate(customer.phone)}</td><td>${ssrInterpolate(customer.email)}</td><td>${ssrInterpolate(customer.bank_account_number)}</td><td>`);
         _push(ssrRenderComponent(unref(Link), {
           href: _ctx.route("customers.edit", customer.id),
@@ -242,6 +251,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     customer: {}
   },
   setup(__props) {
+    const { generateAvatar } = useAvatar();
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<div${ssrRenderAttrs(mergeProps({ class: "row py-5 px-4" }, _attrs))}><div class="col-md-5 mx-auto">`);
       _push(ssrRenderComponent(unref(Link), {
@@ -263,9 +273,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       }, _parent));
       _push(`<div class="bg-white shadow rounded overflow-hidden"><div class="px-4 pt-0 pb-4 cover"><div class="media align-items-end profile-head d-flex"><div class="profile mr-3"><img class="rounded mb-2 img-thumbnail" style="${ssrRenderStyle({ "width": "130px", "height": "130px", "object-fit": "cover" })}"${ssrRenderAttr(
         "src",
-        _ctx.customer.image ? `/${_ctx.customer.image}` : `https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(
-          `${_ctx.customer.first_name} ${_ctx.customer.last_name}`
-        )}`
+        _ctx.customer.image ? `/${_ctx.customer.image}` : unref(generateAvatar)(_ctx.customer)
       )}${ssrRenderAttr("alt", `${_ctx.customer.first_name} ${_ctx.customer.last_name}`)}></div><div class="media-body mb-5 text-white"><h4 class="mt-0 mb-0">${ssrInterpolate(_ctx.customer.first_name)} ${ssrInterpolate(_ctx.customer.last_name)}</h4><p class="small mb-4">${ssrInterpolate(_ctx.customer.email)}</p></div></div></div><div class="px-4 py-3"><div class="p-4 rounded shadow-sm bg-light"><table class="table table-bordered"><tbody><tr><td style="${ssrRenderStyle({ "width": "250px" })}">First Name</td><td>${ssrInterpolate(_ctx.customer.first_name)}</td></tr><tr><td style="${ssrRenderStyle({ "width": "250px" })}">Last Name</td><td>${ssrInterpolate(_ctx.customer.last_name)}</td></tr><tr><td style="${ssrRenderStyle({ "width": "250px" })}">Email</td><td>${ssrInterpolate(_ctx.customer.email)}</td></tr><tr><td style="${ssrRenderStyle({ "width": "250px" })}">Phone</td><td>${ssrInterpolate(_ctx.customer.phone)}</td></tr><tr><td style="${ssrRenderStyle({ "width": "250px" })}">Account Number</td><td>${ssrInterpolate(_ctx.customer.bank_account_number)}</td></tr><tr><td style="${ssrRenderStyle({ "width": "250px" })}">About</td><td>${ssrInterpolate(_ctx.customer.about)}</td></tr></tbody></table></div></div></div></div></div>`);
     };
   }
