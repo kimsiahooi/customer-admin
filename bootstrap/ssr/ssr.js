@@ -1,6 +1,7 @@
-import { useSSRContext, defineComponent, mergeProps, unref, createSSRApp, h as h$1 } from "vue";
-import { ssrRenderSlot, ssrRenderAttrs, ssrRenderList, ssrInterpolate, ssrRenderAttr, ssrRenderStyle } from "vue/server-renderer";
-import { usePage, useForm, createInertiaApp } from "@inertiajs/vue3";
+import { useSSRContext, defineComponent, mergeProps, unref, withCtx, createVNode, createTextVNode, reactive, computed, createSSRApp, h as h$1 } from "vue";
+import { ssrRenderSlot, ssrRenderAttrs, ssrRenderList, ssrInterpolate, ssrRenderComponent, ssrRenderAttr, ssrRenderStyle, ssrIncludeBooleanAttr, ssrLooseContain, ssrLooseEqual } from "vue/server-renderer";
+import { usePage, useForm, Link, createInertiaApp } from "@inertiajs/vue3";
+import { pickBy } from "lodash-es";
 import createServer from "@inertiajs/vue3/server";
 import { renderToString } from "@vue/server-renderer";
 const _export_sfc = (sfc, props) => {
@@ -47,7 +48,25 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
       } else {
         _push(`<!---->`);
       }
-      _push(`<div class="card"><div class="card-header"><div class="row"><div class="col-md-2"><a${ssrRenderAttr("href", _ctx.route("customers.index"))} class="btn" style="${ssrRenderStyle({ "background-color": "#4643d3", "color": "white" })}"><i class="fas fa-chevron-left"></i> Back </a></div></div></div><div class="card-body"><form><div class="row"><div class="col-md-12 mb-3"><div class="form-group"><label for="">Image</label><input type="file" class="form-control" name="image" accept="image/*"></div></div><div class="col-md-6 mb-3"><div class="form-group"><label for="">First Name</label><input type="text" class="form-control" name="first_name"${ssrRenderAttr("value", unref(form).first_name)}></div></div><div class="col-md-6 mb-3"><div class="form-group"><label for="">Last Name</label><input type="text" class="form-control" name="last_name"${ssrRenderAttr("value", unref(form).last_name)}></div></div><div class="col-md-6 mb-3"><div class="form-group"><label for="">Email</label><input type="email" class="form-control" name="email"${ssrRenderAttr("value", unref(form).email)}></div></div><div class="col-md-6 mb-3"><div class="form-group"><label for="">Phone</label><input type="tel" class="form-control" name="phone"${ssrRenderAttr("value", unref(form).phone)}></div></div><div class="col-md-12 mb-3"><div class="form-group"><label for="">Bank Account Number</label><input type="number" class="form-control" name="bank_account_number"${ssrRenderAttr("value", unref(form).bank_account_number)}></div></div><div class="col-md-12 mb-3"><div class="form-group"><label for="">About</label><textarea class="form-control" name="about">${ssrInterpolate(unref(form).about)}</textarea></div></div><div class="col-md-12 mb-3"><button type="submit" class="btn btn-dark"><i class="fas fa-save"></i> Create </button></div></div></form></div></div></div></div>`);
+      _push(`<div class="card"><div class="card-header"><div class="row"><div class="col-md-2">`);
+      _push(ssrRenderComponent(unref(Link), {
+        href: _ctx.route("customers.index"),
+        class: "btn",
+        style: { "background-color": "#4643d3", "color": "white" }
+      }, {
+        default: withCtx((_, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(`<i class="fas fa-chevron-left"${_scopeId}></i> Back `);
+          } else {
+            return [
+              createVNode("i", { class: "fas fa-chevron-left" }),
+              createTextVNode(" Back ")
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+      _push(`</div></div></div><div class="card-body"><form><div class="row"><div class="col-md-12 mb-3"><div class="form-group"><label for="">Image</label><input type="file" class="form-control" name="image" accept="image/*"></div></div><div class="col-md-6 mb-3"><div class="form-group"><label for="">First Name</label><input type="text" class="form-control" name="first_name"${ssrRenderAttr("value", unref(form).first_name)}></div></div><div class="col-md-6 mb-3"><div class="form-group"><label for="">Last Name</label><input type="text" class="form-control" name="last_name"${ssrRenderAttr("value", unref(form).last_name)}></div></div><div class="col-md-6 mb-3"><div class="form-group"><label for="">Email</label><input type="email" class="form-control" name="email"${ssrRenderAttr("value", unref(form).email)}></div></div><div class="col-md-6 mb-3"><div class="form-group"><label for="">Phone</label><input type="tel" class="form-control" name="phone"${ssrRenderAttr("value", unref(form).phone)}></div></div><div class="col-md-12 mb-3"><div class="form-group"><label for="">Bank Account Number</label><input type="number" class="form-control" name="bank_account_number"${ssrRenderAttr("value", unref(form).bank_account_number)}></div></div><div class="col-md-12 mb-3"><div class="form-group"><label for="">About</label><textarea class="form-control" name="about">${ssrInterpolate(unref(form).about)}</textarea></div></div><div class="col-md-12 mb-3"><button type="submit" class="btn btn-dark"><i class="fas fa-save"></i> Create </button></div></div></form></div></div></div></div>`);
     };
   }
 });
@@ -90,7 +109,25 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       } else {
         _push(`<!---->`);
       }
-      _push(`<div class="card"><div class="card-header"><div class="row"><div class="col-md-2"><a${ssrRenderAttr("href", _ctx.route("customers.index"))} class="btn" style="${ssrRenderStyle({ "background-color": "#4643d3", "color": "white" })}"><i class="fas fa-chevron-left"></i> Back </a></div></div></div><div class="card-body"><form><div class="row"><div class="col-md-12 mb-3"><img style="${ssrRenderStyle({ "width": "100px", "height": "100px", "object-fit": "cover" })}"${ssrRenderAttr(
+      _push(`<div class="card"><div class="card-header"><div class="row"><div class="col-md-2">`);
+      _push(ssrRenderComponent(unref(Link), {
+        href: _ctx.route("customers.index"),
+        class: "btn",
+        style: { "background-color": "#4643d3", "color": "white" }
+      }, {
+        default: withCtx((_, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(`<i class="fas fa-chevron-left"${_scopeId}></i> Back `);
+          } else {
+            return [
+              createVNode("i", { class: "fas fa-chevron-left" }),
+              createTextVNode(" Back ")
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+      _push(`</div></div></div><div class="card-body"><form><div class="row"><div class="col-md-12 mb-3"><img style="${ssrRenderStyle({ "width": "100px", "height": "100px", "object-fit": "cover" })}"${ssrRenderAttr(
         "src",
         _ctx.customer.image ? `/${_ctx.customer.image}` : `https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(
           `${unref(form).first_name} ${unref(form).last_name}`
@@ -117,15 +154,71 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     customers: {}
   },
   setup(__props) {
+    const params = reactive({
+      search: "",
+      order: "desc"
+    });
+    computed(() => pickBy(params, (v2) => v2));
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "row justify-content-center mt-5" }, _attrs))}><div class="col-md-8"><h3>Customers</h3><div class="card"><div class="card-header"><div class="row"><div class="col-md-2"><a${ssrRenderAttr("href", _ctx.route("customers.create"))} class="btn" style="${ssrRenderStyle({ "background-color": "#4643d3", "color": "white" })}"><i class="fas fa-plus"></i> Create Customer </a></div><div class="col-md-8"><form action=""><div class="input-group mb-3"><input type="text" class="form-control" placeholder="Search anything..." aria-describedby="button-addon2"><button class="btn btn-outline-secondary" type="submit" id="button-addon2"> Search </button></div></form></div><div class="col-md-2"><div class="input-group mb-3"><select class="form-select" name="" id=""><option value="">Newest to Old</option><option value="">Old to Newest</option></select></div></div></div></div><div class="card-body"><table class="table table-bordered" style="${ssrRenderStyle({ "border": "1px solid #dddddd" })}"><thead><tr><th scope="col">#</th><th scope="col">Avatar</th><th scope="col">First Name</th><th scope="col">Last Name</th><th scope="col">Phone Number</th><th scope="col">Email</th><th scope="col">BAN</th><th scope="col">Action</th></tr></thead><tbody><!--[-->`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "row justify-content-center mt-5" }, _attrs))}><div class="col-md-8"><h3>Customers</h3><div class="card"><div class="card-header"><div class="row"><div class="col-md-2">`);
+      _push(ssrRenderComponent(unref(Link), {
+        href: _ctx.route("customers.create"),
+        class: "btn",
+        style: { "background-color": "#4643d3", "color": "white" }
+      }, {
+        default: withCtx((_, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(`<i class="fas fa-plus"${_scopeId}></i> Create Customer `);
+          } else {
+            return [
+              createVNode("i", { class: "fas fa-plus" }),
+              createTextVNode(" Create Customer ")
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+      _push(`</div><div class="col-md-8"><form><div class="input-group mb-3"><input type="text"${ssrRenderAttr("value", params.search)} name="search" class="form-control" placeholder="Search anything..." aria-describedby="button-addon2"><button class="btn btn-outline-secondary" type="submit" id="button-addon2"> Search </button></div></form></div><div class="col-md-2"><div class="input-group mb-3"><select class="form-select"><option value="desc"${ssrIncludeBooleanAttr(Array.isArray(params.order) ? ssrLooseContain(params.order, "desc") : ssrLooseEqual(params.order, "desc")) ? " selected" : ""}>Newest to Oldest</option><option value="asc"${ssrIncludeBooleanAttr(Array.isArray(params.order) ? ssrLooseContain(params.order, "asc") : ssrLooseEqual(params.order, "asc")) ? " selected" : ""}>Oldest to Newest</option></select></div></div></div></div><div class="card-body"><table class="table table-bordered" style="${ssrRenderStyle({ "border": "1px solid #dddddd" })}"><thead><tr><th scope="col">#</th><th scope="col">Avatar</th><th scope="col">First Name</th><th scope="col">Last Name</th><th scope="col">Phone Number</th><th scope="col">Email</th><th scope="col">BAN</th><th scope="col">Action</th></tr></thead><tbody><!--[-->`);
       ssrRenderList(_ctx.customers, (customer) => {
         _push(`<tr><th scope="row">${ssrInterpolate(customer.id)}</th><td><img style="${ssrRenderStyle({ "width": "40px", "height": "40px", "object-fit": "cover", "border-radius": "50%" })}"${ssrRenderAttr(
           "src",
           customer.image ? `/${customer.image}` : `https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(
             `${customer.first_name} ${customer.last_name}`
           )}`
-        )}${ssrRenderAttr("alt", `${customer.first_name} ${customer.last_name}`)}></td><td>${ssrInterpolate(customer.first_name)}</td><td>${ssrInterpolate(customer.last_name)}</td><td>${ssrInterpolate(customer.phone)}</td><td>${ssrInterpolate(customer.email)}</td><td>${ssrInterpolate(customer.bank_account_number)}</td><td><a${ssrRenderAttr("href", _ctx.route("customers.edit", customer.id))} style="${ssrRenderStyle({ "color": "#2c2c2c" })}" class="ms-1 me-1"><i class="far fa-edit"></i></a><a${ssrRenderAttr("href", _ctx.route("customers.show", customer.id))} style="${ssrRenderStyle({ "color": "#2c2c2c" })}" class="ms-1 me-1"><i class="far fa-eye"></i></a><a href="" style="${ssrRenderStyle({ "color": "#2c2c2c" })}" class="ms-1 me-1"><i class="fas fa-trash-alt"></i></a></td></tr>`);
+        )}${ssrRenderAttr("alt", `${customer.first_name} ${customer.last_name}`)}></td><td>${ssrInterpolate(customer.first_name)}</td><td>${ssrInterpolate(customer.last_name)}</td><td>${ssrInterpolate(customer.phone)}</td><td>${ssrInterpolate(customer.email)}</td><td>${ssrInterpolate(customer.bank_account_number)}</td><td>`);
+        _push(ssrRenderComponent(unref(Link), {
+          href: _ctx.route("customers.edit", customer.id),
+          style: { "color": "#2c2c2c" },
+          class: "ms-1 me-1"
+        }, {
+          default: withCtx((_, _push2, _parent2, _scopeId) => {
+            if (_push2) {
+              _push2(`<i class="far fa-edit"${_scopeId}></i>`);
+            } else {
+              return [
+                createVNode("i", { class: "far fa-edit" })
+              ];
+            }
+          }),
+          _: 2
+        }, _parent));
+        _push(ssrRenderComponent(unref(Link), {
+          href: _ctx.route("customers.show", customer.id),
+          style: { "color": "#2c2c2c" },
+          class: "ms-1 me-1"
+        }, {
+          default: withCtx((_, _push2, _parent2, _scopeId) => {
+            if (_push2) {
+              _push2(`<i class="far fa-eye"${_scopeId}></i>`);
+            } else {
+              return [
+                createVNode("i", { class: "far fa-eye" })
+              ];
+            }
+          }),
+          _: 2
+        }, _parent));
+        _push(`<button style="${ssrRenderStyle({ "color": "#2c2c2c", "background-color": "transparent", "padding": "0", "border": "0" })}" class="ms-1 me-1"><i class="fas fa-trash-alt"></i></button></td></tr>`);
       });
       _push(`<!--]--></tbody></table></div></div></div></div>`);
     };
@@ -150,7 +243,25 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "row py-5 px-4" }, _attrs))}><div class="col-md-5 mx-auto"><a${ssrRenderAttr("href", _ctx.route("customers.index"))} class="btn mb-3" style="${ssrRenderStyle({ "background-color": "#4643d3", "color": "white" })}"><i class="fas fa-chevron-left"></i> Back </a><div class="bg-white shadow rounded overflow-hidden"><div class="px-4 pt-0 pb-4 cover"><div class="media align-items-end profile-head d-flex"><div class="profile mr-3"><img class="rounded mb-2 img-thumbnail" style="${ssrRenderStyle({ "width": "130px", "height": "130px", "object-fit": "cover" })}"${ssrRenderAttr(
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "row py-5 px-4" }, _attrs))}><div class="col-md-5 mx-auto">`);
+      _push(ssrRenderComponent(unref(Link), {
+        href: _ctx.route("customers.index"),
+        class: "btn mb-3",
+        style: { "background-color": "#4643d3", "color": "white" }
+      }, {
+        default: withCtx((_, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(`<i class="fas fa-chevron-left"${_scopeId}></i> Back `);
+          } else {
+            return [
+              createVNode("i", { class: "fas fa-chevron-left" }),
+              createTextVNode(" Back ")
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+      _push(`<div class="bg-white shadow rounded overflow-hidden"><div class="px-4 pt-0 pb-4 cover"><div class="media align-items-end profile-head d-flex"><div class="profile mr-3"><img class="rounded mb-2 img-thumbnail" style="${ssrRenderStyle({ "width": "130px", "height": "130px", "object-fit": "cover" })}"${ssrRenderAttr(
         "src",
         _ctx.customer.image ? `/${_ctx.customer.image}` : `https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(
           `${_ctx.customer.first_name} ${_ctx.customer.last_name}`
