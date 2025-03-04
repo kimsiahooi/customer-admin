@@ -11,12 +11,12 @@
         <div class="card-header">
           <div class="row">
             <div class="col-md-2">
-              <a
+              <Link
                 :href="route('customers.index')"
                 class="btn"
                 style="background-color: #4643d3; color: white">
                 <i class="fas fa-chevron-left"></i> Back
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -109,7 +109,7 @@
 
 <script setup lang="ts">
 import Layout from "@/Layouts/App.vue";
-import { useForm, usePage } from "@inertiajs/vue3";
+import { Link, useForm, usePage } from "@inertiajs/vue3";
 
 defineOptions({ layout: Layout });
 

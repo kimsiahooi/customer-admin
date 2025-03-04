@@ -6,12 +6,12 @@
         <div class="card-header">
           <div class="row">
             <div class="col-md-2">
-              <a
+              <Link
                 :href="route('customers.create')"
                 class="btn"
                 style="background-color: #4643d3; color: white">
                 <i class="fas fa-plus"></i> Create Customer
-              </a>
+              </Link>
             </div>
             <div class="col-md-8">
               <form action="">
@@ -80,18 +80,18 @@
                 <td>{{ customer.email }}</td>
                 <td>{{ customer.bank_account_number }}</td>
                 <td>
-                  <a
+                  <Link
                     :href="route('customers.edit', customer.id)"
                     style="color: #2c2c2c"
                     class="ms-1 me-1">
                     <i class="far fa-edit"></i>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     :href="route('customers.show', customer.id)"
                     style="color: #2c2c2c"
                     class="ms-1 me-1">
                     <i class="far fa-eye"></i>
-                  </a>
+                  </Link>
                   <a href="" style="color: #2c2c2c" class="ms-1 me-1">
                     <i class="fas fa-trash-alt"></i>
                   </a>
@@ -108,6 +108,7 @@
 <script setup lang="ts">
 import Layout from "@/Layouts/App.vue";
 import type { Customer } from "@/types/Customer";
+import { Link } from "@inertiajs/vue3";
 
 defineOptions({ layout: Layout });
 

@@ -2,12 +2,12 @@
   <div class="row py-5 px-4">
     <div class="col-md-5 mx-auto">
       <!-- Profile widget -->
-      <a
+      <Link
         :href="route('customers.index')"
         class="btn mb-3"
         style="background-color: #4643d3; color: white">
         <i class="fas fa-chevron-left"></i> Back
-      </a>
+      </Link>
       <div class="bg-white shadow rounded overflow-hidden">
         <div class="px-4 pt-0 pb-4 cover">
           <div class="media align-items-end profile-head d-flex">
@@ -75,6 +75,7 @@
 <script setup lang="ts">
 import Layout from "@/Layouts/App.vue";
 import type { Customer } from "@/types/Customer";
+import { Link } from "@inertiajs/vue3";
 
 defineOptions({ layout: Layout });
 
