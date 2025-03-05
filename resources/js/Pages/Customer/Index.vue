@@ -126,15 +126,19 @@ import { useAvatar } from "@/Composables/useAvatar";
 
 defineOptions({ layout: Layout });
 
-defineProps<{
+const { query } = defineProps<{
   customers: Customer[];
+  query: { search?: string | null; order?: string | null } | null;
 }>();
 
 const { generateAvatar } = useAvatar();
 
-const params = reactive({
-  search: "",
-  order: "desc",
+const params = reactive<{
+  search: string;
+  order: "asc" | "desc";
+}>({
+  search: query?.search ?? "",
+  order: query?.order === "asc" ? "asc" : "desc",
 });
 
 const computedParams = computed(() => pickBy(params, (v) => v));

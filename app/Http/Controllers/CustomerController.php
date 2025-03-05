@@ -18,10 +18,11 @@ class CustomerController extends Controller
                 ->orWhere('last_name', 'LIKE', "%$request->search%")
                 ->orWhere('phone', 'LIKE', "%$request->search%")
                 ->orWhere('email', 'LIKE', "%$request->search%");
-        })->orderBy('id', $request->order ?? 'desc')->get();
+        })->orderBy('id', $request->order === 'asc' ? 'asc' : 'desc')->get();
 
         return inertia('Customer/Index', [
-            'customers' => $customers
+            'customers' => $customers,
+            'query' => $request->query()
         ]);
     }
 
