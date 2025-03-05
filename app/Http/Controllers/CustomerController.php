@@ -115,11 +115,42 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
+        $customer->delete();
+
+        return back();
+    }
+
+    public function trashIndex(Request $request)
+    {
+        $customers = Customer::onlyTrashed()->when($request->has('search'), function ($query) use ($request) {
+            $query->where('first_name', 'LIKE', "%$request->search%")
+                ->orWhere('last_name', 'LIKE', "%$request->search%")
+                ->orWhere('phone', 'LIKE', "%$request->search%")
+                ->orWhere('email', 'LIKE', "%$request->search%");
+        })->orderBy('id', $request->order === 'asc' ? 'asc' : 'desc')->get();
+
+        return inertia('Customer/Trash', [
+            'customers' => $customers,
+            'query' => $request->query()
+        ]);
+    }
+
+    public function restore(string $id)
+    {
+        Customer::onlyTrashed()->findOrFail($id)->restore();
+
+        return back();
+    }
+
+    public function forceDestroy(string $id)
+    {
+        $customer = Customer::onlyTrashed()->findOrFail($id);
+
         if ($customer->image) {
             Storage::disk('public')->delete($customer->image);
         }
 
-        $customer->delete();
+        $customer->forceDelete();
 
         return back();
     }
