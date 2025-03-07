@@ -54,7 +54,6 @@
           <table class="table table-bordered" style="border: 1px solid #dddddd">
             <thead>
               <tr>
-                <th scope="col">#</th>
                 <th scope="col">Avatar</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
@@ -66,7 +65,6 @@
             </thead>
             <tbody>
               <tr v-for="customer in customers" :key="customer.id">
-                <th scope="row">{{ customer.id }}</th>
                 <td>
                   <img
                     style="

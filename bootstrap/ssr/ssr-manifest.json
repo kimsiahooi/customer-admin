@@ -11,6 +11,8 @@
   "resources/js/Pages/Customer/Index.vue?vue&type=script&setup=true&lang.ts": [],
   "resources/js/Pages/Customer/Show.vue": [],
   "resources/js/Pages/Customer/Show.vue?vue&type=script&setup=true&lang.ts": [],
+  "resources/js/Pages/Customer/Trash.vue": [],
+  "resources/js/Pages/Customer/Trash.vue?vue&type=script&setup=true&lang.ts": [],
   "resources/js/ssr.js": [],
   "vendor/tightenco/ziggy/dist/index.js": []
 }

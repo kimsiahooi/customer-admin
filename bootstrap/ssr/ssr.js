@@ -13,18 +13,18 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-const _sfc_main$4 = {};
+const _sfc_main$5 = {};
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
   ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
 }
-const _sfc_setup$4 = _sfc_main$4.setup;
-_sfc_main$4.setup = (props, ctx) => {
+const _sfc_setup$5 = _sfc_main$5.setup;
+_sfc_main$5.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Layouts/App.vue");
-  return _sfc_setup$4 ? _sfc_setup$4(props, ctx) : void 0;
+  return _sfc_setup$5 ? _sfc_setup$5(props, ctx) : void 0;
 };
-const Layout = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["ssrRender", _sfc_ssrRender]]);
-const _sfc_main$3 = /* @__PURE__ */ defineComponent({
+const Layout = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["ssrRender", _sfc_ssrRender]]);
+const _sfc_main$4 = /* @__PURE__ */ defineComponent({
   ...{ layout: Layout },
   __name: "Create",
   __ssrInlineRender: true,
@@ -72,15 +72,15 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$3 = _sfc_main$3.setup;
-_sfc_main$3.setup = (props, ctx) => {
+const _sfc_setup$4 = _sfc_main$4.setup;
+_sfc_main$4.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Customer/Create.vue");
-  return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
+  return _sfc_setup$4 ? _sfc_setup$4(props, ctx) : void 0;
 };
 const __vite_glob_0_0 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$3
+  default: _sfc_main$4
 }, Symbol.toStringTag, { value: "Module" }));
 const useAvatar = () => {
   const generateAvatar = (customer) => {
@@ -91,7 +91,7 @@ const useAvatar = () => {
   };
   return { generateAvatar };
 };
-const _sfc_main$2 = /* @__PURE__ */ defineComponent({
+const _sfc_main$3 = /* @__PURE__ */ defineComponent({
   ...{ layout: Layout },
   __name: "Edit",
   __ssrInlineRender: true,
@@ -146,28 +146,30 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$2 = _sfc_main$2.setup;
-_sfc_main$2.setup = (props, ctx) => {
+const _sfc_setup$3 = _sfc_main$3.setup;
+_sfc_main$3.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Customer/Edit.vue");
-  return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
+  return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
 };
 const __vite_glob_0_1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$2
+  default: _sfc_main$3
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$1 = /* @__PURE__ */ defineComponent({
+const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   ...{ layout: Layout },
   __name: "Index",
   __ssrInlineRender: true,
   props: {
-    customers: {}
+    customers: {},
+    query: {}
   },
   setup(__props) {
+    var _a, _b;
     const { generateAvatar } = useAvatar();
     const params = reactive({
-      search: "",
-      order: "desc"
+      search: ((_a = __props.query) == null ? void 0 : _a.search) ?? "",
+      order: ((_b = __props.query) == null ? void 0 : _b.order) === "asc" ? "asc" : "desc"
     });
     computed(() => pickBy(params, (v2) => v2));
     return (_ctx, _push, _parent, _attrs) => {
@@ -189,9 +191,26 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`</div><div class="col-md-8"><form><div class="input-group mb-3"><input type="text"${ssrRenderAttr("value", params.search)} name="search" class="form-control" placeholder="Search anything..." aria-describedby="button-addon2"><button class="btn btn-outline-secondary" type="submit" id="button-addon2"> Search </button></div></form></div><div class="col-md-2"><div class="input-group mb-3"><select class="form-select"><option value="desc"${ssrIncludeBooleanAttr(Array.isArray(params.order) ? ssrLooseContain(params.order, "desc") : ssrLooseEqual(params.order, "desc")) ? " selected" : ""}>Newest to Oldest</option><option value="asc"${ssrIncludeBooleanAttr(Array.isArray(params.order) ? ssrLooseContain(params.order, "asc") : ssrLooseEqual(params.order, "asc")) ? " selected" : ""}>Oldest to Newest</option></select></div></div></div></div><div class="card-body"><table class="table table-bordered" style="${ssrRenderStyle({ "border": "1px solid #dddddd" })}"><thead><tr><th scope="col">#</th><th scope="col">Avatar</th><th scope="col">First Name</th><th scope="col">Last Name</th><th scope="col">Phone Number</th><th scope="col">Email</th><th scope="col">BAN</th><th scope="col">Action</th></tr></thead><tbody><!--[-->`);
+      _push(`</div><div class="col-md-6"><form><div class="input-group mb-3"><input type="text"${ssrRenderAttr("value", params.search)} name="search" class="form-control" placeholder="Search anything..." aria-describedby="button-addon2"><button class="btn btn-outline-secondary" type="submit" id="button-addon2"> Search </button></div></form></div><div class="col-md-2"><div class="input-group mb-3"><select class="form-select"><option value="desc"${ssrIncludeBooleanAttr(Array.isArray(params.order) ? ssrLooseContain(params.order, "desc") : ssrLooseEqual(params.order, "desc")) ? " selected" : ""}>Newest to Oldest</option><option value="asc"${ssrIncludeBooleanAttr(Array.isArray(params.order) ? ssrLooseContain(params.order, "asc") : ssrLooseEqual(params.order, "asc")) ? " selected" : ""}>Oldest to Newest</option></select></div></div><div class="col-md-2 text-end">`);
+      _push(ssrRenderComponent(unref(Link), {
+        href: _ctx.route("customers.trash"),
+        class: "btn btn-dark"
+      }, {
+        default: withCtx((_, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(`<i class="fas fa-trash-alt"${_scopeId}></i> Trash `);
+          } else {
+            return [
+              createVNode("i", { class: "fas fa-trash-alt" }),
+              createTextVNode(" Trash ")
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+      _push(`</div></div></div><div class="card-body"><table class="table table-bordered" style="${ssrRenderStyle({ "border": "1px solid #dddddd" })}"><thead><tr><th scope="col">Avatar</th><th scope="col">First Name</th><th scope="col">Last Name</th><th scope="col">Phone Number</th><th scope="col">Email</th><th scope="col">BAN</th><th scope="col">Action</th></tr></thead><tbody><!--[-->`);
       ssrRenderList(_ctx.customers, (customer) => {
-        _push(`<tr><th scope="row">${ssrInterpolate(customer.id)}</th><td><img style="${ssrRenderStyle({ "width": "40px", "height": "40px", "object-fit": "cover", "border-radius": "50%" })}"${ssrRenderAttr(
+        _push(`<tr><td><img style="${ssrRenderStyle({ "width": "40px", "height": "40px", "object-fit": "cover", "border-radius": "50%" })}"${ssrRenderAttr(
           "src",
           customer.image ? `/${customer.image}` : unref(generateAvatar)(customer)
         )}${ssrRenderAttr("alt", `${customer.first_name} ${customer.last_name}`)}></td><td>${ssrInterpolate(customer.first_name)}</td><td>${ssrInterpolate(customer.last_name)}</td><td>${ssrInterpolate(customer.phone)}</td><td>${ssrInterpolate(customer.email)}</td><td>${ssrInterpolate(customer.bank_account_number)}</td><td>`);
@@ -233,17 +252,17 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$1 = _sfc_main$1.setup;
-_sfc_main$1.setup = (props, ctx) => {
+const _sfc_setup$2 = _sfc_main$2.setup;
+_sfc_main$2.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Customer/Index.vue");
-  return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
+  return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
 const __vite_glob_0_2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$1
+  default: _sfc_main$2
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main = /* @__PURE__ */ defineComponent({
+const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   ...{ layout: Layout },
   __name: "Show",
   __ssrInlineRender: true,
@@ -278,13 +297,88 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
+const _sfc_setup$1 = _sfc_main$1.setup;
+_sfc_main$1.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Customer/Show.vue");
+  return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
+};
+const __vite_glob_0_3 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: _sfc_main$1
+}, Symbol.toStringTag, { value: "Module" }));
+const _sfc_main = /* @__PURE__ */ defineComponent({
+  ...{ layout: Layout },
+  __name: "Trash",
+  __ssrInlineRender: true,
+  props: {
+    customers: {},
+    query: {}
+  },
+  setup(__props) {
+    var _a, _b;
+    const { generateAvatar } = useAvatar();
+    const params = reactive({
+      search: ((_a = __props.query) == null ? void 0 : _a.search) ?? "",
+      order: ((_b = __props.query) == null ? void 0 : _b.order) === "asc" ? "asc" : "desc"
+    });
+    computed(() => pickBy(params, (v2) => v2));
+    return (_ctx, _push, _parent, _attrs) => {
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "row justify-content-center mt-5" }, _attrs))}><div class="col-md-8"><h3>Trash Data</h3><div class="card"><div class="card-header"><div class="row"><div class="col-md-2">`);
+      _push(ssrRenderComponent(unref(Link), {
+        href: _ctx.route("customers.index"),
+        class: "btn",
+        style: { "background-color": "#4643d3", "color": "white" }
+      }, {
+        default: withCtx((_, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(`<i class="fas fa-chevron-left"${_scopeId}></i> Back `);
+          } else {
+            return [
+              createVNode("i", { class: "fas fa-chevron-left" }),
+              createTextVNode(" Back ")
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+      _push(`</div><div class="col-md-8"><form><div class="input-group mb-3"><input type="text"${ssrRenderAttr("value", params.search)} name="search" class="form-control" placeholder="Search anything..." aria-describedby="button-addon2"><button class="btn btn-outline-secondary" type="submit" id="button-addon2"> Search </button></div></form></div><div class="col-md-2"><div class="input-group mb-3"><select class="form-select"><option value="desc"${ssrIncludeBooleanAttr(Array.isArray(params.order) ? ssrLooseContain(params.order, "desc") : ssrLooseEqual(params.order, "desc")) ? " selected" : ""}>Newest to Oldest</option><option value="asc"${ssrIncludeBooleanAttr(Array.isArray(params.order) ? ssrLooseContain(params.order, "asc") : ssrLooseEqual(params.order, "asc")) ? " selected" : ""}>Oldest to Newest</option></select></div></div></div></div><div class="card-body"><table class="table table-bordered" style="${ssrRenderStyle({ "border": "1px solid #dddddd" })}"><thead><tr><th scope="col">Avatar</th><th scope="col">First Name</th><th scope="col">Last Name</th><th scope="col">Phone Number</th><th scope="col">Email</th><th scope="col">BAN</th><th scope="col">Action</th></tr></thead><tbody><!--[-->`);
+      ssrRenderList(_ctx.customers, (customer) => {
+        _push(`<tr><td><img style="${ssrRenderStyle({ "width": "40px", "height": "40px", "object-fit": "cover", "border-radius": "50%" })}"${ssrRenderAttr(
+          "src",
+          customer.image ? `/${customer.image}` : unref(generateAvatar)(customer)
+        )}${ssrRenderAttr("alt", `${customer.first_name} ${customer.last_name}`)}></td><td>${ssrInterpolate(customer.first_name)}</td><td>${ssrInterpolate(customer.last_name)}</td><td>${ssrInterpolate(customer.phone)}</td><td>${ssrInterpolate(customer.email)}</td><td>${ssrInterpolate(customer.bank_account_number)}</td><td>`);
+        _push(ssrRenderComponent(unref(Link), {
+          method: "post",
+          as: "button",
+          href: _ctx.route("customers.restore", customer.id),
+          style: { "color": "#2c2c2c" },
+          class: "ms-1 me-1"
+        }, {
+          default: withCtx((_, _push2, _parent2, _scopeId) => {
+            if (_push2) {
+              _push2(` restore `);
+            } else {
+              return [
+                createTextVNode(" restore ")
+              ];
+            }
+          }),
+          _: 2
+        }, _parent));
+        _push(`<button style="${ssrRenderStyle({ "color": "#2c2c2c", "background-color": "transparent", "padding": "0", "border": "0" })}" class="ms-1 me-1"> delete </button></td></tr>`);
+      });
+      _push(`<!--]--></tbody></table></div></div></div></div>`);
+    };
+  }
+});
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Customer/Show.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Customer/Trash.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const __vite_glob_0_3 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_4 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main
 }, Symbol.toStringTag, { value: "Module" }));
@@ -624,7 +718,7 @@ createServer(
     page,
     render: renderToString,
     resolve: (name) => {
-      const pages = /* @__PURE__ */ Object.assign({ "./Pages/Customer/Create.vue": __vite_glob_0_0, "./Pages/Customer/Edit.vue": __vite_glob_0_1, "./Pages/Customer/Index.vue": __vite_glob_0_2, "./Pages/Customer/Show.vue": __vite_glob_0_3 });
+      const pages = /* @__PURE__ */ Object.assign({ "./Pages/Customer/Create.vue": __vite_glob_0_0, "./Pages/Customer/Edit.vue": __vite_glob_0_1, "./Pages/Customer/Index.vue": __vite_glob_0_2, "./Pages/Customer/Show.vue": __vite_glob_0_3, "./Pages/Customer/Trash.vue": __vite_glob_0_4 });
       return pages[`./Pages/${name}.vue`];
     },
     setup({ App, props, plugin }) {

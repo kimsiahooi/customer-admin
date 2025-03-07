@@ -1,5 +1,5 @@
 export interface Customer {
-  readonly id: number;
+  readonly id: string;
   image: string | null;
   first_name: string;
   last_name: string;
